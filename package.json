@@ -1,0 +1,24 @@
+{
+  "name": "minimalist-sentiment-analyzer",
+  "version": "1.0.0",
+  "description": "Minimalist AI-powered Sentiment Analysis Web Application",
+  "main": "api/analyze.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "vercel dev"
+  },
+  "keywords": [
+    "sentiment-analysis",
+    "openai",
+    "supabase",
+    "vercel"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "dotenv": "^16.4.7",
+    "openai": "^4.86.1"
+  }
+}
+

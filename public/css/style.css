@@ -1,0 +1,627 @@
+/* ==============================================================================
+   파일명: public/css/style.css
+   설명: 감성 분석 웹 서비스 - 스위스 타이포그래피 기반 미니멀 흑백 스타일시트
+   디자인 컨셉: High-contrast Swiss Typography, Bold Monochrome Layout, Responsive
+   ============================================================================== */
+
+/* -------------------------------------------------------------
+   1. CSS 변수 및 전역 스타일 리셋 (CSS Custom Properties)
+   ------------------------------------------------------------- */
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8F9FA;
+  --bg-card: #FFFFFF;
+  --text-primary: #000000;
+  --text-muted: #666666;
+  --border-color: #000000;
+  --border-light: #E5E7EB;
+  
+  /* 감성 상태별 포인트 컬러 */
+  --accent-positive: #059669; /* 산뜻한 에메랄드 그린 */
+  --accent-negative: #DC2626; /* 강렬한 레드 */
+  --accent-neutral: #4B5563;  /* 묵직한 다크 그레이 */
+
+  /* 타이포그래피 */
+  --font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 기본 마진/패딩 제거 및 박스 사이징 통일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* 접근성: 화면 낭독기용 숨김 클래스 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* -------------------------------------------------------------
+   2. 전체 레이아웃 래퍼 (App Container)
+   ------------------------------------------------------------- */
+.app-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* -------------------------------------------------------------
+   3. Header (상단 브랜딩 및 메타 메뉴)
+   ------------------------------------------------------------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 3.5rem;
+}
+
+/* 좌측 검은색 사각형 뱃지 로고 */
+.brand-logo-box {
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  font-weight: 900;
+}
+
+.brand-logo-box .logo-sub {
+  font-size: 0.65rem;
+  color: #A3A3A3;
+  margin-bottom: 0.2rem;
+}
+
+.brand-logo-box .logo-main {
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+/* 우측 상단 메타 네비게이션 */
+.meta-nav {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.meta-nav .nav-item {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transition: color var(--transition-fast);
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.meta-nav .nav-item:hover,
+.meta-nav .nav-item.active {
+  color: var(--text-primary);
+}
+
+.meta-nav .nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000000;
+}
+
+/* -------------------------------------------------------------
+   4. Hero Section (대형 타이포그래피)
+   ------------------------------------------------------------- */
+.main-content {
+  flex: 1;
+}
+
+.hero-typography {
+  margin-bottom: 3rem;
+}
+
+.hero-title {
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title .line-1 {
+  color: #000000;
+}
+
+.hero-title .line-2 {
+  color: #000000;
+  -webkit-text-stroke: 1px #000000;
+}
+
+.hero-subtext {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 650px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* -------------------------------------------------------------
+   5. Analyzer Section (입력 폼 및 버튼)
+   ------------------------------------------------------------- */
+.analyzer-section {
+  margin-bottom: 4rem;
+}
+
+.sentiment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-wrapper {
+  position: relative;
+  border: 2px solid var(--border-color);
+  background-color: #FFFFFF;
+  transition: box-shadow var(--transition-fast);
+}
+
+.input-wrapper:focus-within {
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.minimal-textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 1.5rem;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.minimal-textarea::placeholder {
+  color: #A3A3A3;
+  font-weight: 400;
+}
+
+/* 입력 바 하단 카운터 */
+.input-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-top: 1px solid var(--border-light);
+  background-color: var(--bg-secondary);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.char-counter.error {
+  color: var(--accent-negative);
+  font-weight: 700;
+}
+
+/* 실행 버튼 */
+.action-btn {
+  align-self: flex-start;
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 2px solid #000000;
+  padding: 1.1rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover:not(:disabled) {
+  background-color: #FFFFFF;
+  color: #000000;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.action-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.action-btn:disabled {
+  background-color: #737373;
+  border-color: #737373;
+  cursor: not-allowed;
+}
+
+/* 에러 메시지 상자 */
+.error-box {
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--accent-negative);
+  background-color: #FEF2F2;
+  color: var(--accent-negative);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.error-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: var(--accent-negative);
+  color: #FFFFFF;
+  font-weight: 900;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.error-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------
+   6. Result Section (분석 결과 출력 카드)
+   ------------------------------------------------------------- */
+.result-section {
+  margin-bottom: 4.5rem;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #000000;
+}
+
+.result-label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.result-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.result-card {
+  border: 2px solid #000000;
+  padding: 2.25rem;
+  background-color: #FFFFFF;
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.badge-confidence-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* 감성 상태 뱃지 */
+.sentiment-badge {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.badge-positive {
+  background-color: var(--accent-positive);
+}
+
+.badge-negative {
+  background-color: var(--accent-negative);
+}
+
+.badge-neutral {
+  background-color: var(--accent-neutral);
+}
+
+/* 신뢰도 텍스트 */
+.confidence-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.confidence-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.confidence-value {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* 신뢰도 바 */
+.confidence-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: #E5E7EB;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  background-color: #000000;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 분석 사유 박스 */
+.reason-box {
+  border-left: 4px solid #000000;
+  padding-left: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.reason-heading {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.reason-text {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------
+   7. History Section (최근 분석 이력 목록)
+   ------------------------------------------------------------- */
+.history-section {
+  margin-bottom: 4.5rem;
+}
+
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.section-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 0.25rem 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+.history-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.history-empty {
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  border: 1px dashed #CBD5E1;
+}
+
+.history-card {
+  border: 1px solid #000000;
+  padding: 1.25rem 1.5rem;
+  background-color: #FFFFFF;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.history-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.history-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.history-text {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.history-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* -------------------------------------------------------------
+   8. About Section (서비스 안내 영역)
+   ------------------------------------------------------------- */
+.about-section {
+  border-top: 2px solid #000000;
+  padding-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.about-item h4 {
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.about-item p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* -------------------------------------------------------------
+   9. Footer (하단 영역)
+   ------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--border-light);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-positive);
+  display: inline-block;
+}
+
+/* -------------------------------------------------------------
+   10. 반응형 미디어 쿼리 (Responsive Web Design)
+   ------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .site-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .action-btn {
+    width: 100%;
+  }
+
+  .badge-confidence-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .confidence-container {
+    align-items: flex-start;
+  }
+
+  .result-card {
+    padding: 1.5rem;
+  }
+}
+
